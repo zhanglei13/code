@@ -1,15 +1,35 @@
 package sort;
 
+import java.util.List;
+
 /**
- * Created by zhanglei on 2015/1/6.
+ * Created by zhanglei on 2015/1/7.
  * 选择排序
- * 基本思想：在要排序的一组数中，选出最小的一个数与第一个位置的数交换，然后在剩下的数当中再找最小的与第二个位置的数交换，
- * 如此循环到倒数第二个数和最后一个数比较为止。
+ * 交换节点的val值，时间复杂度O（n^2）,空间复杂度O（1）
  */
 
 public class SelectSort implements Solution {
     @Override
     public ListNode sort(ListNode head) {
-        return null;
+        if (head == null)
+            return head;
+
+        ListNode result = head, minNode, current;
+
+        while (head.next != null) {
+            minNode = head;
+
+            for (current = head.next; current != null; current = current.next) {
+                if (current.val < minNode.val)
+                    minNode = current;
+            }
+
+            int temp = head.val;
+            head.val = minNode.val;
+            minNode.val = temp;
+            head = head.next;
+        }
+
+        return result;
     }
 }

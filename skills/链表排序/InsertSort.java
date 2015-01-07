@@ -3,13 +3,35 @@ package sort;
 /**
  * Created by zhanglei on 2015/1/7.
  * 插入排序
- * 基本思想：在要排序的一组数中，假设前面(n-1)个数已经是排好顺序的，现在要把第n个数插到前面的有序数中，
- * 使得这n个数也是排好顺序的。如此反复循环，直到全部排好顺序。
+ * 直接交换节点，时间复杂度O（n^2）,空间复杂度O（1）
  */
 
 public class InsertSort implements Solution {
     @Override
     public ListNode sort(ListNode head) {
-        return null;
+        if (head == null)
+            return head;
+
+        ListNode start = new ListNode(0);
+        start.next = head;
+        ListNode prev = head, last = head.next;
+
+        while (last != null) {
+            if (prev.val <= last.val) {
+                last = last.next;
+                prev = prev.next;
+            } else {
+                head = start;
+                while (head.next.val < last.val)
+                    head = head.next;
+
+                prev.next = last.next;
+                last.next = head.next;
+                head.next = last;
+                last = prev.next;
+            }
+        }
+
+        return start.next;
     }
 }
