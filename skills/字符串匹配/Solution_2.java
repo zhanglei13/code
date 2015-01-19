@@ -19,7 +19,7 @@ public class Solution_2 {
                 i++;
                 j++;
             } else
-                j = next[j];
+                j = next[j]; // next[j]表示在j位置匹配出现不同的时候下一个匹配位置
         }
 
         return j == needle.length() ? i - j : -1;
